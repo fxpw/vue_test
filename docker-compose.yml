@@ -9,7 +9,6 @@ services:
     - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
     volumes:
       - .:/app
-      - /app/node_modules
     environment:
     - APP_ENV=${APP_ENV}
 
