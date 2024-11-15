@@ -37,7 +37,6 @@ export default {
 				const response = await api.get("projects");
 				this.list = response.data;
 				this.list.sort((a, b) => a.order - b.order);
-				console.log(39);
 				console.log(response.data);
 			} catch (error) {
 				console.error("Ошибка при получении проектов:", error);
