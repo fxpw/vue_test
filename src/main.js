@@ -1,6 +1,5 @@
 import './style.css'
-
-import { createApp } from 'vue';
+import { createApp} from 'vue';
 
 const app = createApp({});
 
@@ -36,3 +35,4 @@ async function registerComponents() {
 registerComponents().then(() => {
 	app.mount('#app');
 });
+
