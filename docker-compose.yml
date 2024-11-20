@@ -5,19 +5,19 @@ services:
       context: ./docker/vue
       dockerfile: Dockerfile
     ports:
-    - "8080:8080"
+    # - "8080:8080"
     - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
     volumes:
       - .:/app
     environment:
     - APP_ENV=${APP_ENV}
 
-  js-vue-web-nginx:
-    container_name: js-vue-web-nginx
-    image: nginx:alpine
-    volumes:
-      - ./dist:/usr/share/nginx/html
-    ports:
-      - "80:80"
-    depends_on:
-      - js-vue-web-frontend-template
+  # js-vue-web-nginx:
+  #   container_name: js-vue-web-nginx
+  #   image: nginx:alpine
+  #   volumes:
+  #     - ./dist:/usr/share/nginx/html
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - js-vue-web-frontend-template
