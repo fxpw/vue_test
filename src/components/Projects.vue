@@ -35,7 +35,7 @@ export default {
 	methods: {
 		async fetchProjects() {
 			try {
-				const response = await api.get("http://localhost:5000/api/projects");
+				const response = await api.get("projects");
 				this.projects = response.data;
 				this.projects.sort((a, b) => a.order - b.order);
 				console.log(response.data);
