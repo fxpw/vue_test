@@ -38,7 +38,6 @@ export default {
 				const response = await api.get("projects");
 				this.projects = response.data;
 				this.projects.sort((a, b) => a.order - b.order);
-				console.log(response.data);
 			} catch (error) {
 				console.error("Ошибка при получении проектов:", error);
 			}
@@ -56,7 +55,7 @@ export default {
 		async deleteProject(id) {
 			try {
 				await api.delete(`projects/${id}`);
-				this.projects = this.list.filter(project => project.id !== id);
+				this.projects = this.projects.filter(project => project.id !== id);
 			} catch (error) {
 				console.error("Ошибка при удалении проекта:", error);
 			}
