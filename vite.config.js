@@ -2,6 +2,12 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
+	resolve: {
+        alias: {
+            '$components': resolve(__dirname, 'src/components'), // Алиас для папки components
+            '$assets': resolve(__dirname, 'src/assets'), // Алиас для папки components
+        }
+    },
 	plugins: [
 		vue()
 	],

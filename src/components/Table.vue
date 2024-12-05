@@ -1,21 +1,39 @@
-<!-- src/components/Projects.vue -->
+<!-- src/components/Table.vue -->
 <template>
-	<h3>Draggable table</h3>
-	<div>
-		<input v-model="newProject" placeholder="Введите название проекта" />
-		<button @click="addProject">Добавить проект</button>
+	<div v-if="typeOfShow == 'projects'">
+		<h3>Draggable table</h3>
+		<div>
+			<input v-model="newProject" placeholder="Введите название проекта" />
+			<button @click="addProject">Добавить проект</button>
+		</div>
+		<draggable v-model="projects" item-key="id" @end="onDragEnd">
+			<template #item="{ element }">
+				<div class="list-group-item"
+					@dblclick="async () => { typeOfShow = 'project-modal'; await goToProjectModal(element.id); }">
+					<span>{{ element.name }}</span>
+					<button @click="deleteProject(element.id)">Удалить</button>
+				</div>
+			</template>
+		</draggable>
 	</div>
-	<draggable v-model="projects" item-key="id" @end="onDragEnd">
-		<template #item="{ element }">
-			<div class="list-group-item" @dblclick="goToProjectTasks(element.id)">
-				<span>{{ element.name }}</span>
-				<button @click="deleteProject(element.id)">Удалить</button>
+	<div v-else-if="typeOfShow == 'project-modal'">
+		<h3>project-modal</h3>
+		<div class="list-group-item">
+			<div>
+				{{ projectName }}
 			</div>
-		</template>
-	</draggable>
+			<button @click= "() => {typeOfShow = 'projects';}">BACK</button>
+		</div>
+	</div>
+	<div v-else-if="typeOfShow == 'tasks'">
+		<h3>tasks</h3>
+	</div>
+	<div v-else-if="typeOfShow == 'task-modal'">
+		<h3>task-modal</h3>
+	</div>
 </template>
 
-<script>
+<script >
 import api from '../api';
 import draggable from "vuedraggable";
 
@@ -30,6 +48,8 @@ export default {
 		return {
 			projects: [],
 			newProject: "",
+			typeOfShow: "projects",
+			projectName:""
 		};
 	},
 	methods: {
@@ -61,7 +81,6 @@ export default {
 			}
 		},
 		async updateProjectOrder() {
-			console.log("updateProjectOrder");
 			try {
 				// Создаем массив с обновленным порядком
 				const updatedOrder = this.projects.map((item, index) => ({
@@ -75,12 +94,24 @@ export default {
 				console.error("Ошибка при обновлении порядка проектов:", error);
 			}
 		},
+		async getProject(projectId){
+			try {
+				const response = await api.get(`projects/${projectId}`);
+				this.projectName=response.data.name;
+			} catch (error) {
+				console.error("getProject:", error);
+			}
+		},
 		async onDragEnd() {
 			this.updateProjectOrder();
 		},
-		goToProjectTasks(projectId) {
-			this.$router.push(`/project/${projectId}`);
-		}
+		async goToProjectModal(projectId) {
+			await this.getProject(projectId);
+		},
+		setTypeOfShow(type) {
+			this.typeOfShow = type; // Устанавливаем
+		},
+
 	},
 	created() {
 		this.fetchProjects();
