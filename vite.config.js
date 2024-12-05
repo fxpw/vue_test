@@ -1,13 +1,8 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-
+import { resolve } from 'path';
 export default defineConfig({
-	resolve: {
-        alias: {
-            '$components': resolve(__dirname, 'src/components'), // Алиас для папки components
-            '$assets': resolve(__dirname, 'src/assets'), // Алиас для папки components
-        }
-    },
+	
 	plugins: [
 		vue()
 	],
@@ -23,7 +18,10 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			vue: 'vue/dist/vue.esm-bundler.js',
-		},
+			$components: resolve(__dirname, 'src/components'),
+			$assets: resolve(__dirname, 'src/assets'),
+			$api: resolve(__dirname, 'src/api'),
+			vue: 'vue/dist/vue.esm-bundler.js', // Псевдоним для Vue (если требуется)
+		}
 	},
 })
