@@ -18,7 +18,7 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			$components: resolve(__dirname, 'src/components'),
+			$inc: resolve(__dirname, 'src/components/inc'),
 			$assets: resolve(__dirname, 'src/assets'),
 			$api: resolve(__dirname, 'src/api'),
 			vue: 'vue/dist/vue.esm-bundler.js', // Псевдоним для Vue (если требуется)

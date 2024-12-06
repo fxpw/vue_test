@@ -1,7 +1,7 @@
 import './style.css'
 import { createApp } from 'vue';
-
-const app = createApp({});
+import store from './store';
+const app = createApp({}).use(store);
 
 const blacklist = [
 ];
