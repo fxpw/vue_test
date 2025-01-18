@@ -14,14 +14,14 @@ export default defineConfig({
 		},
 	},
 	build: {
-		// buildDirectory: 'my_build_directory',
+		outDir: 'build',
 	},
 	resolve: {
 		alias: {
 			$inc: resolve(__dirname, 'src/components/inc'),
 			$assets: resolve(__dirname, 'src/assets'),
 			$api: resolve(__dirname, 'src/api'),
-			vue: 'vue/dist/vue.esm-bundler.js', // Псевдоним для Vue (если требуется)
+			vue: 'vue/dist/vue.esm-bundler.js',
 		}
 	},
 })

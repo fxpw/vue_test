@@ -7,7 +7,6 @@
 	<div v-else-if="currentModal == 'project-modal'">
 		<ProjectModal />
 	</div>
-
 </template>
 
 <script setup>
