@@ -1,5 +1,5 @@
-exec_in_vite_container=docker compose exec js-vue-web-frontend
-exec_in_php_container=docker compose exec php-web-backend
+exec_in_container=docker compose exec js-vue-web-frontend-template
+
 
 .PHONY: build start
 all: build start
@@ -23,15 +23,11 @@ rebuild: down build_no_cache up
 	echo "rebuild"
 
 npm_install:
-	$(exec_in_vite_container) npm install $(p)
-	$(exec_in_vite_container) npm i -D
+	$(exec_in_container) npm install $(p)
+
 vite_build:
-	$(exec_in_vite_container) npm run build
+	$(exec_in_container) npm run build
+vite_preview:
+	$(exec_in_container) npm run preview
 vite_dev:
-	$(exec_in_vite_container) npm run dev
-vite_exec:
-	$(exec_in_vite_container) $(c)
-
-
-php_exec:
-	$(exec_in_php_container) $(c)
+	$(exec_in_container) npm run dev
